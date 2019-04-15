@@ -44,7 +44,7 @@ const testMessage = () => ({
     text: 'Привет МИР!',
 });
 
-const testModule = new messageModule(timer, count, testMessage);
+const testModule = new messageModule(timer, count);
 
 setInterval(() => testModule.pushMessage(testMessage()), 1000);
 
