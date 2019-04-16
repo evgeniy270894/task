@@ -3,6 +3,7 @@ class messageModule {
         this.timer = timer;
         this.count = count;
         this._flagTime = false;
+        this._timeoutId = null,
         this.store = [];
     }
 
@@ -12,13 +13,15 @@ class messageModule {
 
     createTimer() {
         if (!this._flagTime) {
-            setTimeout(() => this.sendMessage('TIMER'), this.timer)
+            this._timeoutId = setTimeout(() => this.sendMessage('TIMER'), this.timer)
         }
     }
 
     sendMessage(place) {
         this.store = []
         this._flagTime = false;
+        clearTimeout(this._timeoutId);
+        this._timeoutId = null;
         console.log(`======= Сообщения удалены из ${place}========>`, this.store)
     }
 
@@ -36,8 +39,8 @@ class messageModule {
 }
 
 
-const timer = 10 * 1000;
-const count = 5;
+const timer = 5 * 1000;
+const count = 10;
 const testMessage = () => ({
     id: Math.random(),
     title: `Тестовое Сообщение`,
